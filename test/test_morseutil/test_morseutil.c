@@ -32,27 +32,30 @@ void test__morse_seq_map_hash_func()
     TEST_ASSERT_EQUAL(35, _morse_seq_map_hash_func('Z'));
 }
 
-void test_get_morse_sequence()
+void test___get_letter_morse_sequence()
 {
 
     MorseSeq zero;
-    memcpy(zero, _MORSE_SEQ_MAP[0], sizeof(MorseSeq));
+    MorseSeq zero_seq = __M_0;
+    memcpy(zero, zero_seq, sizeof(MorseSeq));
     unsigned char zero_char = '0';
-    MorseSeq *result_for_zero = get_morse_sequence(zero_char);
+    MorseSeq *result_for_zero = _get_letter_morse_sequence(zero_char);
 
     TEST_ASSERT_EQUAL(0, memcmp(zero, *result_for_zero, sizeof(MorseSeq)));
 
     MorseSeq four;
-    memcpy(four, _MORSE_SEQ_MAP[4], sizeof(MorseSeq));
+    MorseSeq four_seq = __M_4;
+    memcpy(four, four_seq, sizeof(MorseSeq));
     unsigned char four_char = '4';
-    MorseSeq *result_for_four = get_morse_sequence(four_char);
+    MorseSeq *result_for_four = _get_letter_morse_sequence(four_char);
 
     TEST_ASSERT_EQUAL(0, memcmp(four, *result_for_four, sizeof(MorseSeq)));
 
     MorseSeq R;
-    memcpy(R, _MORSE_SEQ_MAP[27], sizeof(MorseSeq));
+    MorseSeq R_seq = __M_R;
+    memcpy(R, R_seq, sizeof(MorseSeq));
     unsigned char R_char = 'R';
-    MorseSeq *result_for_R = get_morse_sequence(R_char);
+    MorseSeq *result_for_R = _get_letter_morse_sequence(R_char);
 
     TEST_ASSERT_EQUAL(0, memcmp(R, *result_for_R, sizeof(MorseSeq)));
 }
@@ -63,7 +66,7 @@ int main(int argc, char **argv)
     UNITY_BEGIN();
 
     RUN_TEST(test__morse_seq_map_hash_func);
-    RUN_TEST(test_get_morse_sequence);
+    RUN_TEST(test___get_letter_morse_sequence);
 
     UNITY_END();
 }
