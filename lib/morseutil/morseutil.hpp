@@ -5,8 +5,8 @@
 #define TIME_UNIT 1000
 #define __DOT TIME_UNIT
 #define __DASH (3 * TIME_UNIT)
-#define __SPACING_SAME_LETTER (TIME_UNIT * -1)
-#define __SPACING_BETWEEN_LETTERS (TIME_UNIT * -1)
+#define __SPACING_SAME_LETTER ( TIME_UNIT * -1)
+#define __SPACING_BETWEEN_LETTERS (3 * TIME_UNIT * -1)
 #define __SPACING_BETWEEN_WORDS (7 * TIME_UNIT * -1)
 
 #define _MORSE_SEQ_SIZE 5
@@ -56,6 +56,7 @@
 #define __M_Y {__DASH, __DOT, __DASH, __DASH, 0}
 #define __M_Z {__DASH, __DASH, __DOT, __DOT, 0}
 
+
 typedef int MorseSeq[_MORSE_SEQ_SIZE];
 
 typedef MorseSeq MorseSeqMap[_MORSE_SEQ_MAP_SIZE];
@@ -65,5 +66,7 @@ extern MorseSeqMap _MORSE_SEQ_MAP;
 int _morse_seq_map_hash_func(char c);
 
 MorseSeq *_get_letter_morse_sequence(unsigned char c);
+
+int iterator(unsigned char *s);
 
 #endif

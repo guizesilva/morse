@@ -1,6 +1,8 @@
+#include <stdio.h>
 #include <unity.h>
 #include <string.h>
-#include "morseutil.h"
+
+#include "morseutil.hpp"
 
 void setUp(void)
 {
@@ -60,6 +62,43 @@ void test___get_letter_morse_sequence()
     TEST_ASSERT_EQUAL(0, memcmp(R, *result_for_R, sizeof(MorseSeq)));
 }
 
+void test_iterator()
+{
+
+    unsigned char text[] = "AB";
+
+    int expected[] = {
+        __DOT,
+        __SPACING_SAME_LETTER,
+        __DASH,
+        __SPACING_BETWEEN_LETTERS,
+        __DASH,
+        __SPACING_SAME_LETTER,
+        __DOT,
+        __SPACING_SAME_LETTER,
+        __DOT,
+        __SPACING_SAME_LETTER,
+        __DOT,
+        __SPACING_SAME_LETTER,
+    };
+
+    int i = 0;
+
+    while (true)
+    {
+        int res = iterator(text);
+
+        if (res == 0)
+            break;
+
+        char msg_buffer[16];
+        snprintf(msg_buffer, sizeof(msg_buffer), "%d", i + 1);
+
+        TEST_ASSERT_EQUAL_INT_MESSAGE(expected[i], res, msg_buffer);
+        i++;
+    }
+}
+
 int main(int argc, char **argv)
 {
 
@@ -67,6 +106,7 @@ int main(int argc, char **argv)
 
     RUN_TEST(test__morse_seq_map_hash_func);
     RUN_TEST(test___get_letter_morse_sequence);
+    RUN_TEST(test_iterator);
 
     UNITY_END();
 }

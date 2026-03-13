@@ -1,4 +1,4 @@
-#include "morseutil.h"
+#include "morseutil.hpp"
 
 MorseSeqMap _MORSE_SEQ_MAP = {
     __M_0,
@@ -51,4 +51,47 @@ int _morse_seq_map_hash_func(char c)
 MorseSeq *_get_letter_morse_sequence(unsigned char c)
 {
     return &_MORSE_SEQ_MAP[_morse_seq_map_hash_func(c)];
+}
+
+int iterator(unsigned char *s) {
+
+
+    static int char_i = 0;
+    static int seq_i = 0;
+    static bool seq_spc = false;
+
+    static unsigned char c = s[char_i];
+
+    static MorseSeq *seq = _get_letter_morse_sequence(c);
+
+    if (seq_spc) {
+
+        int curr_t = *seq[seq_i];
+        if (curr_t == 0) {
+            char_i++;
+            seq_i = 0;
+            seq_spc = false;
+
+            c = s[char_i];
+
+            if (c == 0) {
+                return 0;
+            }
+
+            seq = _get_letter_morse_sequence(c);
+            return __SPACING_BETWEEN_LETTERS;
+        }
+
+        seq_spc = false;
+        return __SPACING_SAME_LETTER;
+    };
+    
+
+    int t = *seq[seq_i];
+
+    seq_i++;
+    seq_spc = true;
+
+    return t;
+
 }
